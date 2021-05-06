@@ -13,7 +13,11 @@ export default {
 <style scoped lang="scss">
 @import'@/styles/vars';
     header{
-        padding:10px;
+        height: 50px;
+        padding-left:10px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
         background: $mycolorLight;
         img{
             width: 30px;

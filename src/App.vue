@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    
+    My app
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  
-}
+@import '~@fontsource/roboto/index.css';
+@import '~@fontsource/roboto/700.css';
+@import '@/styles/general.scss';
 </style>

@@ -1,5 +1,8 @@
 <template>
     <div class="cont">
+        <div class="select">
+            <Select/>
+        </div>
         <div class="albums">
             <Card v-for = "(album, index) in albums" :key ='index' :info ="album"/>
         </div>
@@ -8,11 +11,13 @@
 
 <script>
 import Card from'@/components/Card.vue';
+import Select from'@/components/Select.vue';
 import axios from 'axios';
 export default {
     name:'Main',
     components: {
         Card,
+        Select,
     },
     data(){
         return{
@@ -44,6 +49,10 @@ export default {
 @import'@/styles/vars';
     .cont{
         background:$mycolor;
+        .select{
+            text-align: center;
+            padding-top:20px;
+        }
         .albums{
             width: 80%;
             margin:0 auto;

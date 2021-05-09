@@ -1,11 +1,13 @@
 <template>
     <div class="cont">
         <div class="select">
-            <Select @valueChange = "musicGenre" />
+            <Select  @valueChange = "musicGenre" />
         </div>
-        
-        <div  class="albums">
-            <Card v-for = "(album, index) in filteredAlbums" :key ='index' :info ="album"/>
+        <!-- <div v-show="this.newAlbums.lenght == 0" class="albums">
+            <Card v-for = "(album, index) in  albums" :key ='index' :info ="album"/>
+        </div> -->
+        <div class="albums">
+            <Card  @load="caricamento" v-for = "(album, index) in  newAlbums" :key ='index' :info ="album"/>
         </div>
     </div>
 </template>
@@ -24,7 +26,7 @@ export default {
         return{
             apiURL:'https://flynn.boolean.careers/exercises/api/array/music',
             albums:[],
-            filteredAlbums:[],
+            newAlbums:[],
             loading:true,
             fitro:'',
         }
@@ -32,6 +34,34 @@ export default {
     created(){
         this.getAlbums();
     },
+    /*computed:{
+        filteredAlbums(){
+           // this.filtro = text;
+            //console.log('cambio!',text);
+            if(this.fitro===''){
+                return this.albums
+            }else{
+                return this.newAlbums
+            }
+
+             return this.albums.filter(item=>{
+                
+                if(this.fitro==='all'){
+                    return item;
+                }else if(this.fitro==='pop'){
+                    return item.genre==='Pop'
+                }else if(this.fitro==='jazz'){
+                    return item.genre==='Jazz'
+                }else if(this.fitro==='rock'){
+                    return item.genre ==='Rock'
+                }else if(this.fitro==='metal'){
+                    return item.genre ==='Metal'
+                }
+                
+            }) 
+            
+        }
+    }, */
     methods:{
         getAlbums(){
             axios.get(this.apiURL)
@@ -46,10 +76,12 @@ export default {
         },
         musicGenre(text){
             this.filtro = text;
+            console.log(this.filtro)
             console.log('cambio!',text);
-            this.filteredAlbums = this.albums.filter(item=>{
-                if(text===''){
-                    return this.albums;
+                
+                this.newAlbums = this.albums.filter(item=>{    
+                if(text==='all'){
+                    return item;
                 }else if(text==='pop'){
                     return item.genre==='Pop'
                 }else if(text==='jazz'){
@@ -58,11 +90,12 @@ export default {
                     return item.genre ==='Rock'
                 }else if(text==='metal'){
                     return item.genre ==='Metal'
-                }else if(text==='all'){
-                    return this.albums
                 }
-            });
-        },
+            });  
+        }, 
+        caricamento(){
+            return this.newAlbums = this.albums;
+        }
     },
 }
 </script>

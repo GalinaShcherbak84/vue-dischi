@@ -3,11 +3,9 @@
         <div class="select">
             <Select  @valueChange = "musicGenre" />
         </div>
-        <!-- <div v-show="this.newAlbums.lenght == 0" class="albums">
-            <Card v-for = "(album, index) in  albums" :key ='index' :info ="album"/>
-        </div> -->
+        
         <div class="albums">
-            <Card  @load="caricamento" v-for = "(album, index) in  newAlbums" :key ='index' :info ="album"/>
+            <Card   v-for = "(album, index) in  newAlbums" :key ='index' :info ="album"/>
         </div>
     </div>
 </template>
@@ -68,6 +66,7 @@ export default {
             .then(res=>{
                 console.log(res.data.response);
                 this.albums = res.data.response;
+                this.newAlbums = res.data.response;
                 this.loading = false;
             })
             .catch(err=>{
@@ -93,9 +92,7 @@ export default {
                 }
             });  
         }, 
-        caricamento(){
-            return this.newAlbums = this.albums;
-        }
+        
     },
 }
 </script>

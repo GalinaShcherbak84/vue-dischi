@@ -4,7 +4,7 @@
         <select v-model = "selected" @change="$emit('valueChange', selected)" name="music" id="music">
             <option v-for="(option, index) in options" :key= "index" :value = "option.value">{{option.text}}</option>
         </select>
-        <span>selected:{{selected}}</span>
+        <!-- <span>selected:{{selected}}</span> -->
     </div>
 </template>
 

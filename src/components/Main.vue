@@ -1,10 +1,11 @@
 <template>
     <div class="cont">
         <div class="select">
-            <Select/>
+            <Select @valueChange = "musicGenre" />
         </div>
-        <div class="albums">
-            <Card v-for = "(album, index) in albums" :key ='index' :info ="album"/>
+        
+        <div  class="albums">
+            <Card v-for = "(album, index) in filteredAlbums" :key ='index' :info ="album"/>
         </div>
     </div>
 </template>
@@ -23,7 +24,9 @@ export default {
         return{
             apiURL:'https://flynn.boolean.careers/exercises/api/array/music',
             albums:[],
+            filteredAlbums:[],
             loading:true,
+            fitro:'',
         }
     },
     created(){
@@ -40,7 +43,26 @@ export default {
             .catch(err=>{
                 console.log('Errore',err);
             })
-        }
+        },
+        musicGenre(text){
+            this.filtro = text;
+            console.log('cambio!',text);
+            this.filteredAlbums = this.albums.filter(item=>{
+                if(text===''){
+                    return this.albums;
+                }else if(text==='pop'){
+                    return item.genre==='Pop'
+                }else if(text==='jazz'){
+                    return item.genre==='Jazz'
+                }else if(text==='rock'){
+                    return item.genre ==='Rock'
+                }else if(text==='metal'){
+                    return item.genre ==='Metal'
+                }else if(text==='all'){
+                    return this.albums
+                }
+            });
+        },
     },
 }
 </script>
@@ -49,6 +71,8 @@ export default {
 @import'@/styles/vars';
     .cont{
         background:$mycolor;
+        height: calc(100vh - 50px);
+        overflow: auto;
         .select{
             text-align: center;
             padding-top:20px;

@@ -1,20 +1,41 @@
 <template>
     <div>
         <label for="music">Filter by gender</label>
-        <select name="music" id="music">
-            <option value="Pop">All</option>
-            <option value="Pop">Pop</option>
-            <option value="Jazz">Jazz</option>
-            <option value="Rock">Rock</option>
-            <option value="Metal">Metal</option>
+        <select v-model = "selected" @change="$emit('valueChange', selected)" name="music" id="music">
+            <option v-for="(option, index) in options" :key= "index" :value = "option.value">{{option.text}}</option>
         </select>
+        <span>selected:{{selected}}</span>
     </div>
 </template>
 
 <script>
 export default {
     name: 'Select',
+    data(){
+        return{
+            selected:'',
+            options:[
+            {
+                text: 'All', value:'all'
+            },
+            {
+                text: 'Pop', value:'pop'
+            },
+            {
+                text: 'Jazz', value:'jazz'
+            },
+            {
+                text: 'Rock', value:'rock'
+            },
+            {
+                text: 'Metal', value:'metal'
+            },
+            ],
+            
+        }
+    }
 }
+
 </script>
 
 <style scoped lang="scss">
